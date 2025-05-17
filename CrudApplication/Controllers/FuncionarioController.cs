@@ -72,6 +72,17 @@ namespace CrudApplication.Controllers
         {
              return View();
         }
-    
+
+        [HttpPost]
+        public IActionResult Login(string email, string senha)
+        {
+            var funcionario = _FuncionarioRepositorio.ObterFuncionario(email);
+            if (funcionario != null && funcionario.Senha == senha)
+            {
+                return RedirectToAction("Index", "Menu");
+            }
+            return View(funcionario);
+        }
+        
     }
 }
