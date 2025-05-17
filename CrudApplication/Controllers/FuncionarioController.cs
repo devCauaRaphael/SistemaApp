@@ -1,6 +1,7 @@
 ﻿using CrudApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using CrudApplication.Repositorios;
+using System.Data;
 namespace CrudApplication.Controllers
 {
     public class FuncionarioController : Controller

@@ -57,3 +57,17 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+@if (TempData["MensagemErro"] != null)
+{
+    <script>
+        toastr.error('@TempData["MensagemErro"]');
+    </script>
+}
+@if (TempData["MensagemSucesso"] != null)
+{
+    <script>
+        toastr.success('@TempData["MensagemSucesso"]');
+    </script>
+}

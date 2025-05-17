@@ -9,19 +9,41 @@ namespace CrudApplication.Repositorios
     {
         private readonly string _conexaoMySQL = configuration.GetConnectionString("ConexaoMySQL");
 
-        public void CadastrarFuncionario(tbFuncionario funcionario)
+        public (bool sucesso, string Mensagem) CadastrarFuncionario(tbFuncionario funcionario)
         {
             using (var conexao = new MySqlConnection(_conexaoMySQL))
             {
                 conexao.Open();
-                MySqlCommand cmd = new MySqlCommand("insert into tbFuncionario(Nome, Email, Senha) values (@nome, @email, @senha)", conexao);
-                cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = funcionario.Nome;
-                cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = funcionario.Email;
-                cmd.Parameters.Add("@senha", MySqlDbType.String).Value = funcionario.Senha;
-                cmd.ExecuteNonQuery();
+
+                bool duplicado = false;
+                MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where Email=@email", conexao);
+                cmd.Parameters.AddWithValue("@email", funcionario.Email);
+                using (var dr = cmd.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        duplicado = true;
+                    }
+                }
+                if (duplicado)
+                {
+                    return (false, "Este e-mail já está cadastrado!");
+                }
+                else
+                {
+
+                   MySqlCommand cmdInsert = new MySqlCommand("insert into tbFuncionario(Nome, Email, Senha) values (@nome, @email, @senha)", conexao);
+                  cmdInsert.Parameters.Add("@nome", MySqlDbType.VarChar).Value = funcionario.Nome;
+                  cmdInsert.Parameters.Add("@email", MySqlDbType.VarChar).Value = funcionario.Email;
+                  cmdInsert.Parameters.Add("@senha", MySqlDbType.String).Value = funcionario.Senha;
+                    cmdInsert.ExecuteNonQuery();
+                    return (true, "Cadastro realizado com sucesso!");
+                }
                 conexao.Close();
             }
+          
         }
+        
         public bool AtualizarFuncionario(tbFuncionario funcionario)
         {
             try
