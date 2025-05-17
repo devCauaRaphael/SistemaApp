@@ -63,5 +63,12 @@ namespace CrudApplication.Controllers
             }
             return View(produto);
         }
+        public IActionResult ExcluirProduto(int id)
+        {
+            _ProdutoRepositorio.Excluir(id);
+            return RedirectToAction(nameof(Index));
+
+        }
+
     }
 }
