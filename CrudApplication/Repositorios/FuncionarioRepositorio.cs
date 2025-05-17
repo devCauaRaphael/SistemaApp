@@ -80,12 +80,21 @@ namespace CrudApplication.Repositorios
                 conexao.Open();
                 MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where Email=@email", conexao);
                 cmd.Parameters.AddWithValue("@email", email);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                MySqlDataReader dr;
                 tbFuncionario funcionario = new tbFuncionario();
+
+                dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dr.Read())
+                {
+                    funcionario.Senha = (string)(dr["Senha"]);
+                }
                 return funcionario;
             }
-            
-           
         }
+        
         public tbFuncionario ObterFuncionarioPorId(int id)
         {
             using (var conexao = new MySqlConnection(_conexaoMySQL))
