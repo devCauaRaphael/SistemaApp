@@ -1,7 +1,13 @@
+using CrudApplication.Repositorios;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//injetando dependências
+builder.Services.AddScoped<ProdutoRepositorio>();
+builder.Services.AddScoped<FuncionarioRepositorio>();
 
 var app = builder.Build();
 

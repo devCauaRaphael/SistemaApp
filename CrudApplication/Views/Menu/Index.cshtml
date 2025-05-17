@@ -1,1 +1,67 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <!-- Bootstrap CSS local (instalado via LibMan) -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Bootstrap Icons local -->
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center mb-5">
+                    <h1 class="display-4">Sistema de Gestão</h1>
+                    <p class="lead text-muted">Selecione o módulo que deseja acessar</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-5 mb-4">
+                    <a asp-controller="Funcionario" asp-action="Index" class="module-link">
+                        <div class="card card-module card-employees">
+                            <div class="card-body text-center p-5">
+                                <div class="module-icon text-primary">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+                                <h3 class="card-title">Funcionários</h3>
+                                <p class="card-text text-muted">
+                                    Gerencie colaboradores, cargos e departamentos.
+                                </p>
+                                <span class="badge bg-primary">CRUD Completo</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card Produtos (rota MVC) -->
+                <div class="col-md-5 mb-4">
+                    <a asp-controller="Produto" asp-action="Index" class="module-link">
+                        <div class="card card-module card-products">
+                            <div class="card-body text-center p-5">
+                                <div class="module-icon text-warning">
+                                    <i class="bi bi-box-seam-fill"></i>
+                                </div>
+                                <h3 class="card-title">Produtos</h3>
+                                <p class="card-text text-muted">
+                                    Controle de estoque e cadastro de produtos.
+                                </p>
+                                <span class="badge bg-warning text-dark">CRUD Completo</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
