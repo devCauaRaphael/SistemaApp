@@ -1,146 +1,25 @@
 ﻿@{
-    ViewData["Title"] = "Sistema de Gerenciamento";
+    ViewData["Title"] = "Início";
 }
 
-<div class="container-fluid min-vh-100 d-flex flex-column">
-    <!-- Cabeçalho -->
-    <header class="bg-primary text-white p-3 shadow">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <i class="bi bi-box-seam fs-3 me-2"></i>
-                <h3 class="mb-0">SysGerenciamento</h3>
-            </div>
-            <div>
-                <span class="me-3"><i class="bi bi-person-fill me-1"></i>Usuário Admin</span>
-                <a href="#" class="text-white"><i class="bi bi-box-arrow-right"></i></a>
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4">🔧 Sistema de Gerenciamento</h1>
+        <p class="lead">Gerencie seus funcionários e produtos com facilidade e eficiência.</p>
+    </div>
+    <div class="row justify-content-center my-5">
+        <div class="col-md-10">
+            <div class="ratio ratio-16x9">
+                <video autoplay muted loop class="video-fundo">
+                    <source src="~/videos/video.mp4" type=video/mp4 />
+                </video>
+                <div class="container text-center text-warning">
+                    <h1>Sistema de Ecommerce</h1>
+                    <p>
+                        <button class="btn btn-outline-warning"></button>
+                    </p>
+
+                </div>
             </div>
         </div>
-    </header>
-
-    <!-- Corpo Principal -->
-    <div class="row flex-grow-1">
-        <!-- Menu Lateral -->
-        <nav class="col-md-2 bg-dark text-white p-3">
-            <ul class="nav flex-column">
-                <li class="nav-item mb-3">
-                    <a class="nav-link text-white active" href="#">
-                        <i class="bi bi-house-door me-2"></i> Início
-                    </a>
-                </li>
-                <li class="nav-item mb-3">
-                    <a asp-controller="Funcionario" asp-action="Index" class="nav-link text-white">
-                        <i class="bi bi-people me-2"></i> Funcionários
-                    </a>
-                </li>
-                <li class="nav-item mb-3">
-                    <a asp-controller="Produto" asp-action="Index" class="nav-link text-white">
-                        <i class="bi bi-box-seam me-2"></i> Produtos
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Conteúdo -->
-        <main class="col-md-10 p-4 bg-light">
-            <div class="container">
-                <h2 class="mb-4"><i class="bi bi-house-door text-primary"></i> Painel de Controle</h2>
-
-                <!-- Cards de Resumo -->
-                <div class="row mb-4">
-                    <div class="col-md-6 mb-3">
-                        <div class="card shadow-sm h-100">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5 class="card-title text-muted">Funcionários</h5>
-                                        <h2 class="mb-0">24</h2>
-                                        <small class="text-muted">Cadastrados no sistema</small>
-                                    </div>
-                                    <div class="bg-primary bg-opacity-10 p-3 rounded-circle">
-                                        <i class="bi bi-people text-primary fs-3"></i>
-                                    </div>
-                                </div>
-                                <a asp-controller="Funcionario" asp-action="Index" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <div class="card shadow-sm h-100">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5 class="card-title text-muted">Produtos</h5>
-                                        <h2 class="mb-0">156</h2>
-                                        <small class="text-muted">Em estoque</small>
-                                    </div>
-                                    <div class="bg-success bg-opacity-10 p-3 rounded-circle">
-                                        <i class="bi bi-box-seam text-success fs-3"></i>
-                                    </div>
-                                </div>
-                                <a asp-controller="Produto" asp-action="Index" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ações Rápidas -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-white">
-                        <h5 class="mb-0"><i class="bi bi-lightning-charge text-warning"></i> Ações Rápidas</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <a asp-controller="Funcionario" asp-action="Create" class="btn btn-outline-primary w-100 py-3">
-                                    <i class="bi bi-person-plus fs-4"></i><br>
-                                    Cadastrar Funcionário
-                                </a>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <a asp-controller="Produto" asp-action="Create" class="btn btn-outline-success w-100 py-3">
-                                    <i class="bi bi-plus-square fs-4"></i><br>
-                                    Cadastrar Produto
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
     </div>
-</div>
-
-<style>
-    .nav-link.active {
-        background-color: rgba(255,255,255,0.1);
-        border-left: 3px solid #0d6efd;
-    }
-
-    .nav-link:hover {
-        background-color: rgba(255,255,255,0.05);
-    }
-
-    .card {
-        transition: transform 0.2s;
-    }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
-        }
-
-    .btn-outline-primary, .btn-outline-success {
-        transition: all 0.2s;
-    }
-
-        .btn-outline-primary:hover {
-            background-color: #0d6efd;
-            color: white !important;
-        }
-
-        .btn-outline-success:hover {
-            background-color: #198754;
-            color: white !important;
-        }
-</style>
