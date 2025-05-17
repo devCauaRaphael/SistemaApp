@@ -10,6 +10,7 @@ CREATE TABLE tbFuncionario(
 
 CREATE TABLE tbProduto(
 	IdProduto int primary key auto_increment,
+    Descricao text not null,
     NomeProduto varchar(50) not null,
     Quantidade int not null,
     Preco decimal(8,2) not null

@@ -13,7 +13,7 @@ namespace CrudApplication.Repositorios
                 using (var conexao = new MySqlConnection(_conexaoMySQL))
                 {
                     conexao.Open();
-                    MySqlCommand cmd = new MySqlCommand("insert into produto(NomeProduto, Descricao, Preco, Quantidade) values (@nomeProduto, @descricao, @preco, @quantidade)", conexao);
+                    MySqlCommand cmd = new MySqlCommand("insert into tbProduto(NomeProduto, Descricao, Preco, Quantidade) values (@nomeProduto, @descricao, @preco, @quantidade)", conexao);
                     cmd.Parameters.Add("@nomeProduto", MySqlDbType.VarChar).Value = produto.NomeProduto;
                     cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.Descricao;
                     cmd.Parameters.Add("@preco", MySqlDbType.Decimal).Value = produto.Preco;
@@ -29,7 +29,7 @@ namespace CrudApplication.Repositorios
                 using (var conexao = new MySqlConnection(_conexaoMySQL))
                 {
                     conexao.Open();
-                    MySqlCommand cmd = new MySqlCommand("Update produto set NomeProduto=@nomeProduto, Descricao=@descricao, Preco=@preco, Quantidade=@quantidade" + " where IdProduto=@codigo", conexao);
+                    MySqlCommand cmd = new MySqlCommand("Update tbPoduto set NomeProduto=@nomeProduto, Descricao=@descricao, Preco=@preco, Quantidade=@quantidade" + " where IdProduto=@codigo", conexao);
                     cmd.Parameters.Add("@codigo", MySqlDbType.Int32).Value = produto.IdProduto;
                     cmd.Parameters.Add("@nomeProduto", MySqlDbType.VarChar).Value = produto.NomeProduto;
                     cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = produto.Descricao;
