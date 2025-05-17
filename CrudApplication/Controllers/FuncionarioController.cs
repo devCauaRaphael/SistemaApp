@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CrudApplication.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CrudApplication.Controllers
 {
@@ -13,7 +14,17 @@ namespace CrudApplication.Controllers
 
         public IActionResult Index()
         {
+            return View(_FuncionarioRepositorio.TodosFuncionarios());
+        }
+        public IActionResult CadastrarFuncionario()
+        {
             return View();
+        }
+        [HttpPost]
+        public IActionResult CadastrarFuncionario(tbFuncionario funcionario)
+        {
+            _FuncionarioRepositorio.CadastrarFuncionario(funcionario);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
