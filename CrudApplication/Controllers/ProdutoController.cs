@@ -1,6 +1,6 @@
 ﻿using CrudApplication.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using CrudApplication.Repositorios;
 namespace CrudApplication.Controllers
 {
     public class ProdutoController : Controller
@@ -24,7 +24,7 @@ namespace CrudApplication.Controllers
         [HttpPost]
         public IActionResult CadastrarProduto(tbProduto produto)
         {
-            _ProdutoRepositorio.Cadastrar(produto);
+            _ProdutoRepositorio.CadastrarProduto(produto);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult EditarProduto(int id)
@@ -50,7 +50,7 @@ namespace CrudApplication.Controllers
             {
                 try
                 {
-                    if (_ProdutoRepositorio.Atualizar(produto))
+                    if (_ProdutoRepositorio.AtualizarProduto(produto))
                     {
                         return RedirectToAction(nameof(Index));
                     }
@@ -65,7 +65,7 @@ namespace CrudApplication.Controllers
         }
         public IActionResult ExcluirProduto(int id)
         {
-            _ProdutoRepositorio.Excluir(id);
+            _ProdutoRepositorio.ExcluirProduto(id);
             return RedirectToAction(nameof(Index));
 
         }
