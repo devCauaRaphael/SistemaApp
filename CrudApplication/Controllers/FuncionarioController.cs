@@ -49,7 +49,7 @@ namespace CrudApplication.Controllers
             {
                 try
                 {
-                    if (_FuncionarioRepositorio.AtualizarFuncionariofuncionario))
+                    if (_FuncionarioRepositorio.AtualizarFuncionario(funcionario))
                     {
                         return RedirectToAction(nameof(Index));
                     }
@@ -61,6 +61,12 @@ namespace CrudApplication.Controllers
                 }
             }
             return View(funcionario);
+        }
+        public IActionResult ExcluirFuncionario(int id)
+        {
+            _FuncionarioRepositorio.ExcluirFuncionario(id);
+            return RedirectToAction(nameof(Index));
+
         }
     }
 }
