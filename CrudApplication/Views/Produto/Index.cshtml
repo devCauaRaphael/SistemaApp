@@ -1,5 +1,71 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<CrudApplication.Models.tbProduto>
+
 @{
+    ViewData["Title"] = "Lista de Produtos";
 }
+
+<link href="~/css/listaproduto.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0"><i class="bi bi-box-seam"></i> @ViewData["Title"]</h2>
+        <a asp-controller="Produto" asp-action="CadastrarProduto" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Cadastrar Produto
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th width="8%">Código</th>
+                            <th>Produto</th>
+                            <th>Descrição</th>
+                            <th width="10%">Estoque</th>
+                            <th width="12%">Preço</th>
+                            <th width="16%" class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.IdProduto)</td>
+                                <td>
+                                    <strong>@Html.DisplayFor(modelItem => item.NomeProduto)</strong>
+                                </td>
+                                <td class="text-truncate" style="max-width: 300px;" title="@item.Descricao">
+                                    @item.Descricao
+                                </td>
+                                <td>
+                                    <span class="badge @(item.Quantidade > 0 ? "bg-success" : "bg-danger")">
+                                        @item.Quantidade
+                                    </span>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Preco)
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a asp-controller="Produto" asp-action="EditarProduto" asp-route-id="@item.IdProduto"
+                                           class="btn btn-outline-warning" title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a asp-controller="Produto" asp-action="ExcluirProduto" asp-route-id="@item.IdProduto"
+                                           onclick="return confirm('Tem certeza que deseja excluir este produto?');"
+                                           class="btn btn-outline-danger" title="Excluir">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
