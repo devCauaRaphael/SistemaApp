@@ -1,5 +1,6 @@
 ﻿using CrudApplication.Models;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace CrudApplication.Repositorios
 {
@@ -43,6 +44,37 @@ namespace CrudApplication.Repositorios
                 Console.WriteLine($"Erro ao atualizar produto: {ex.Message}");
                 return false;
             }
+        }
+        public IEnumerable<tbProduto> TodosProdutos()
+        {
+            List<tbProduto> Produtolist = new List<tbProduto>();
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from tbProduto", conexao);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                conexao.Close();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Produtolist.Add(
+                        new tbProduto
+                        {
+                            IdProduto = Convert.ToInt32(dr["IdProduto"]),
+                            NomeProduto = ((string)dr["NomeProduto"]),
+                            Descricao = ((string)dr["Descricao"]),
+                            Preco = ((decimal)dr["Preco"]),
+                            Quantidade = Convert.ToInt32(dr["Quantidade"]),
+                        });
+                }
+
+                return Produtolist;
+            }
+
         }
     }
 }
