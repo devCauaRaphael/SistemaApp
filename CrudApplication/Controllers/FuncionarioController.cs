@@ -24,8 +24,8 @@ namespace CrudApplication.Controllers
         [HttpPost]
         public IActionResult CadastrarFuncionario(tbFuncionario funcionario)
         {
-            _FuncionarioRepositorio.CadastrarFuncionario(funcionario);
-            return RedirectToAction(nameof(Index));
+                _FuncionarioRepositorio.CadastrarFuncionario(funcionario);         
+                return RedirectToAction(nameof(Index));
         }
         public IActionResult EditarFuncionario(int id)
         {

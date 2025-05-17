@@ -9,7 +9,7 @@ namespace CrudApplication.Repositorios
     {
         private readonly string _conexaoMySQL = configuration.GetConnectionString("ConexaoMySQL");
 
-        public (bool sucesso, string Mensagem) CadastrarFuncionario(tbFuncionario funcionario)
+        public void CadastrarFuncionario(tbFuncionario funcionario)
         {
             using (var conexao = new MySqlConnection(_conexaoMySQL))
             {
@@ -26,18 +26,18 @@ namespace CrudApplication.Repositorios
                     }
                 }
                 if (duplicado)
-                {
-                    return (false, "Este e-mail já está cadastrado!");
+                {   
+                    
+                    Console.WriteLine("email já existente");
                 }
                 else
                 {
 
-                   MySqlCommand cmdInsert = new MySqlCommand("insert into tbFuncionario(Nome, Email, Senha) values (@nome, @email, @senha)", conexao);
-                  cmdInsert.Parameters.Add("@nome", MySqlDbType.VarChar).Value = funcionario.Nome;
-                  cmdInsert.Parameters.Add("@email", MySqlDbType.VarChar).Value = funcionario.Email;
-                  cmdInsert.Parameters.Add("@senha", MySqlDbType.String).Value = funcionario.Senha;
+                    MySqlCommand cmdInsert = new MySqlCommand("insert into tbFuncionario(Nome, Email, Senha) values (@nome, @email, @senha)", conexao);
+                    cmdInsert.Parameters.Add("@nome", MySqlDbType.VarChar).Value = funcionario.Nome;
+                    cmdInsert.Parameters.Add("@email", MySqlDbType.VarChar).Value = funcionario.Email;
+                    cmdInsert.Parameters.Add("@senha", MySqlDbType.String).Value = funcionario.Senha;
                     cmdInsert.ExecuteNonQuery();
-                    return (true, "Cadastro realizado com sucesso!");
                 }
                 conexao.Close();
             }
