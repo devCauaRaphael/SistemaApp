@@ -7,19 +7,32 @@
         <h1 class="display-4">🔧 Sistema de Gerenciamento</h1>
         <p class="lead">Gerencie seus funcionários e produtos com facilidade e eficiência.</p>
     </div>
-    <div class="row justify-content-center my-5">
-        <div class="col-md-10">
-            <div class="ratio ratio-16x9">
-                <video autoplay muted loop class="video-fundo">
-                    <source src="~/videos/video.mp4" type=video/mp4 />
-                </video>
-                <div class="container text-center text-warning">
-                    <h1>Sistema de Ecommerce</h1>
-                    <p>
-                        <button class="btn btn-outline-warning"></button>
-                    </p>
 
+    <hr class="my-4">
+
+    <div class="row text-center">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg h-100">
+                <div class="card-body">
+                    <h5 class="card-title">👨‍💼 Módulo de Funcionários</h5>
+                    <p class="card-text">Adicione, edite e visualize todos os seus colaboradores.</p>
+                    <a asp-controller="Funcionario" asp-action="Login" class="btn btn-primary">Acessar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg h-100">
+                <div class="card-body">
+                    <h5 class="card-title">📦 Módulo de Produtos</h5>
+                    <p class="card-text">Gerencie seu estoque e mantenha o controle dos produtos.</p>
+                    <a asp-controller="Funcionario" asp-action="Login" class="btn btn-success">Acessar</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="mt-5 text-muted text-center">
+        <p>Este é um sistema de demonstração desenvolvido com ASP.NET Core MVC + Bootstrap.</p>
+    </div>
+</div>
