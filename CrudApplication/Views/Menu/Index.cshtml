@@ -1,67 +1,145 @@
 ﻿@{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Sistema de Gerenciamento";
 }
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
-    <!-- Bootstrap CSS local (instalado via LibMan) -->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <!-- Bootstrap Icons local -->
-    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
-    <!-- CSS externo -->
-    <link rel="stylesheet" href="~/css/dashboard.css" />
-</head>
-<body>
-    <div class="dashboard-container">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center mb-5">
-                    <h1 class="display-4">Sistema de Gestão</h1>
-                    <p class="lead text-muted">Selecione o módulo que deseja acessar</p>
-                </div>
+<div class="container-fluid min-vh-100 d-flex flex-column">
+    <!-- Cabeçalho -->
+    <header class="bg-primary text-white p-3 shadow">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-box-seam fs-3 me-2"></i>
+                <h3 class="mb-0">SISTEMA DE GERENCIAMENTO</h3>
             </div>
-
-            <div class="row justify-content-center">
-                <div class="col-md-5 mb-4">
-                    <a asp-controller="Funcionario" asp-action="Index" class="module-link">
-                        <div class="card card-module card-employees">
-                            <div class="card-body text-center p-5">
-                                <div class="module-icon text-primary">
-                                    <i class="bi bi-people-fill"></i>
-                                </div>
-                                <h3 class="card-title">Funcionários</h3>
-                                <p class="card-text text-muted">
-                                    Gerencie colaboradores, cargos e departamentos.
-                                </p>
-                                <span class="badge bg-primary">CRUD Completo</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Card Produtos (rota MVC) -->
-                <div class="col-md-5 mb-4">
-                    <a asp-controller="Produto" asp-action="Index" class="module-link">
-                        <div class="card card-module card-products">
-                            <div class="card-body text-center p-5">
-                                <div class="module-icon text-warning">
-                                    <i class="bi bi-box-seam-fill"></i>
-                                </div>
-                                <h3 class="card-title">Produtos</h3>
-                                <p class="card-text text-muted">
-                                    Controle de estoque e cadastro de produtos.
-                                </p>
-                                <span class="badge bg-warning text-dark">CRUD Completo</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+            <div>
+                <span class="me-3"><i class="bi bi-person-fill me-1"></i>Usuário Admin</span>
+                <a href="#" class="text-white"><i class="bi bi-box-arrow-right"></i></a>
             </div>
         </div>
+    </header>
+
+    <!-- Corpo Principal -->
+    <div class="row flex-grow-1">
+        <!-- Menu Lateral -->
+        <nav class="col-md-2 bg-dark text-white p-3">
+            <ul class="nav flex-column">
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-white active" href="#">
+                        <i class="bi bi-house-door me-2"></i> Início
+                    </a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a asp-controller="Funcionario" asp-action="Index" class="nav-link text-white">
+                        <i class="bi bi-people me-2"></i> Funcionários
+                    </a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a asp-controller="Produto" asp-action="Index" class="nav-link text-white">
+                        <i class="bi bi-box-seam me-2"></i> Produtos
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Conteúdo -->
+        <main class="col-md-10 p-4 bg-light">
+            <div class="container">
+                <h2 class="mb-4"><i class="bi bi-house-door text-primary"></i> Painel de Controle</h2>
+
+                <!-- Cards de Resumo -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="card-title text-muted">Funcionários</h5>
+                                        <h2 class="mb-0">24</h2>
+                                        <small class="text-muted">Cadastrados no sistema</small>
+                                    </div>
+                                    <div class="bg-primary bg-opacity-10 p-3 rounded-circle">
+                                        <i class="bi bi-people text-primary fs-3"></i>
+                                    </div>
+                                </div>
+                                <a asp-controller="Funcionario" asp-action="Index" class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="card-title text-muted">Produtos</h5>
+                                        <small class="text-muted">Consulte o Sistema</small>
+                                    </div>
+                                    <div class="bg-success bg-opacity-10 p-3 rounded-circle">
+                                        <i class="bi bi-box-seam text-success fs-3"></i>
+                                    </div>
+                                </div>
+                                <a asp-controller="Produto" asp-action="Index" class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ações Rápidas -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0"><i class="bi bi-lightning-charge text-warning"></i> Ações Rápidas</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <a asp-controller="Funcionario" asp-action="CadastrarFuncionario" class="btn btn-outline-primary w-100 py-3">
+                                    <i class="bi bi-person-plus fs-4"></i><br>
+                                    Cadastrar Funcionário
+                                </a>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <a asp-controller="Produto" asp-action="CadastrarProduto" class="btn btn-outline-success w-100 py-3">
+                                    <i class="bi bi-plus-square fs-4"></i><br>
+                                    Cadastrar Produto
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-</body>
-</html>
+</div>
+
+<style>
+    .nav-link.active {
+        background-color: rgba(255,255,255,0.1);
+        border-left: 3px solid #0d6efd;
+    }
+
+    .nav-link:hover {
+        background-color: rgba(255,255,255,0.05);
+    }
+
+    .card {
+        transition: transform 0.2s;
+    }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+        }
+
+    .btn-outline-primary, .btn-outline-success {
+        transition: all 0.2s;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #0d6efd;
+            color: white !important;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #198754;
+            color: white !important;
+        }
+</style>
