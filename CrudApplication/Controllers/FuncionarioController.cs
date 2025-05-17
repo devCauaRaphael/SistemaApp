@@ -28,7 +28,7 @@ namespace CrudApplication.Controllers
         }
         public IActionResult EditarFuncionario(int id)
         {
-            var funcionario = _FuncionarioRepositorio.ObterFuncionario(id);
+            var funcionario = _FuncionarioRepositorio.ObterFuncionarioPorId(id);
 
             if (funcionario == null)
             {
@@ -76,7 +76,7 @@ namespace CrudApplication.Controllers
         [HttpPost]
         public IActionResult Login(string email, string senha)
         {
-            var funcionario = _FuncionarioRepositorio.ObterFuncionario(email);
+            var funcionario = _FuncionarioRepositorio.ObterFuncionarioPorEmail(email);
             if (funcionario != null && funcionario.Senha == senha)
             {
                 return RedirectToAction("Index", "Menu");

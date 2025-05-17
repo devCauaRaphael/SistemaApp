@@ -73,13 +73,26 @@ namespace CrudApplication.Repositorios
                 return Funcionariolist;
             }
         }
-        public tbFuncionario ObterFuncionario(int Codigo)
+        public tbFuncionario ObterFuncionarioPorEmail( string email)
         {
             using (var conexao = new MySqlConnection(_conexaoMySQL))
             {
                 conexao.Open();
-                MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where IdFuncionario=@codigo", conexao);
-                cmd.Parameters.AddWithValue("@codigo", Codigo);
+                MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where Email=@email", conexao);
+                cmd.Parameters.AddWithValue("@email", email);
+                tbFuncionario funcionario = new tbFuncionario();
+                return funcionario;
+            }
+            
+           
+        }
+        public tbFuncionario ObterFuncionarioPorId(int id)
+        {
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where IdFuncionario=@id", conexao);
+                cmd.Parameters.AddWithValue("@id",id);
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 MySqlDataReader dr;
