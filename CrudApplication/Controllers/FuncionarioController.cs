@@ -26,5 +26,41 @@ namespace CrudApplication.Controllers
             _FuncionarioRepositorio.CadastrarFuncionario(funcionario);
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult EditarFuncionario(int id)
+        {
+            var funcionario = _FuncionarioRepositorio.ObterFuncionario(id);
+
+            if (funcionario == null)
+            {
+                return NotFound();
+            }
+            return View(funcionario);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditarFuncionario(int id, [Bind("IdFuncionario, Nome,Email,Senha")] tbFuncionario funcionario)
+        {
+            ModelState.Clear();
+            if (id != funcionario.IdFuncionario)
+            {
+                return BadRequest();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (_FuncionarioRepositorio.AtualizarFuncionariofuncionario))
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Ocorreu um erro ao Editar.");
+                    return View(funcionario);
+                }
+            }
+            return View(funcionario);
+        }
     }
 }
