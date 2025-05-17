@@ -5,7 +5,7 @@ namespace CrudApplication.Controllers
 {
     public class FuncionarioController : Controller
     {
-        FuncionarioRepositorio _FuncionarioRepositorio;
+        private readonly FuncionarioRepositorio _FuncionarioRepositorio;
 
         public FuncionarioController(FuncionarioRepositorio funcionarioRepositorio)
         {
