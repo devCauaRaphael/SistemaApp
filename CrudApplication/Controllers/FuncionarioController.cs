@@ -68,5 +68,10 @@ namespace CrudApplication.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+        public IActionResult Login()
+        {
+             return View();
+        }
+    
     }
 }
