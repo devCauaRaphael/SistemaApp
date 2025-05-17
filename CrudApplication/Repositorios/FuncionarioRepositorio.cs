@@ -1,6 +1,7 @@
 ﻿using CrudApplication.Models;
 using MySql.Data.MySqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace CrudApplication.Repositorios
 {
@@ -43,6 +44,35 @@ namespace CrudApplication.Repositorios
                 return false;
             }
         }
-    }
+        public IEnumerable<tbFuncionario> TodosFuncionario()
+        {
+            List<tbFuncionario> Funcionariolist = new List<tbFuncionario>();
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario", conexao);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
 
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                conexao.Close();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Funcionariolist.Add(
+                        new tbFuncionario
+                        {
+                            IdFuncionario = Convert.ToInt32(dr["IdFuncionario"]),
+                            Nome = ((string)dr["Nome"]),
+                            Email = ((string)dr["Email"]),
+                            Senha = ((string)dr["Senha"]),
+                        });
+                }
+
+                return Funcionariolist;
+            }
+        }
+
+    }
 }
