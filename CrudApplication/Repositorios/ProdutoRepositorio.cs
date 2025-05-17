@@ -101,5 +101,17 @@ namespace CrudApplication.Repositorios
                 return produto;
             }
         }
+        public void ExcluirProduto(int Id)
+        {
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = new MySqlCommand("delete from tbProduto where IdProduto=@codigo", conexao);
+                cmd.Parameters.AddWithValue("@codigo", Id);
+                int i = cmd.ExecuteNonQuery();
+                conexao.Close();
+            }
+        }
     }
 }
