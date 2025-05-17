@@ -44,7 +44,7 @@ namespace CrudApplication.Repositorios
                 return false;
             }
         }
-        public IEnumerable<tbFuncionario> TodosFuncionario()
+        public IEnumerable<tbFuncionario> TodosFuncionarios()
         {
             List<tbFuncionario> Funcionariolist = new List<tbFuncionario>();
             using (var conexao = new MySqlConnection(_conexaoMySQL))
@@ -73,6 +73,41 @@ namespace CrudApplication.Repositorios
                 return Funcionariolist;
             }
         }
+        public tbFuncionario ObterFuncionario(int Codigo)
+        {
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where IdFuncionario=@codigo", conexao);
+                cmd.Parameters.AddWithValue("@codigo", Codigo);
 
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                MySqlDataReader dr;
+                tbFuncionario funcionario = new tbFuncionario();
+
+                dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dr.Read())
+                {
+                    funcionario.IdFuncionario = Convert.ToInt32(dr["IdFuncionario"]);
+                    funcionario.Nome = ((string)dr["Nome"]);
+                    funcionario.Email = ((string)dr["Email"]);
+                   funcionario.Senha = (string)(dr["Senha"]);
+                }
+                return funcionario;
+            }
+        }
+        public void ExcluirFuncionario(int Id)
+        {
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+
+                MySqlCommand cmd = new MySqlCommand("delete from tbFuncionario where IdFuncionario=@codigo", conexao);
+                cmd.Parameters.AddWithValue("@codigo", Id);
+                int i = cmd.ExecuteNonQuery();
+                conexao.Close();
+            }
+        }
     }
 }
