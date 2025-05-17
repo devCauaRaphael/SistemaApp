@@ -76,5 +76,30 @@ namespace CrudApplication.Repositorios
             }
 
         }
+        public tbProduto ObterProduto(int Codigo)
+        {
+            using (var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from tbProduto where IdProduto=@codigo", conexao);
+                cmd.Parameters.AddWithValue("@codigo", Codigo);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                MySqlDataReader dr;
+                tbProduto produto = new tbProduto();
+
+                dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dr.Read())
+                {
+                    produto.IdProduto = Convert.ToInt32(dr["IdProduto"]);
+                    produto.NomeProduto = ((string)dr["NomeProduto"]);
+                    produto.Descricao = ((string)dr["Descricao"]);
+                    produto.Preco = (decimal)(dr["Preco"]);
+                    produto.Quantidade = Convert.ToInt32(dr["Quantidade"]);
+                }
+                return produto;
+            }
+        }
     }
 }
