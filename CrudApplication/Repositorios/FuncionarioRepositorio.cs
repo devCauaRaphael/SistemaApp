@@ -111,6 +111,7 @@ namespace CrudApplication.Repositorios
                 while (dr.Read())
                 {
                     funcionario.Senha = (string)(dr["Senha"]);
+                    funcionario.Email = (string)(dr["Email"]);
                 }
                 return funcionario;
             }
@@ -152,5 +153,6 @@ namespace CrudApplication.Repositorios
                 conexao.Close();
             }
         }
+   
     }
 }

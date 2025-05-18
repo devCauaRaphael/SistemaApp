@@ -24,8 +24,8 @@ namespace CrudApplication.Controllers
         [HttpPost]
         public IActionResult CadastrarFuncionario(tbFuncionario funcionario)
         {
-                _FuncionarioRepositorio.CadastrarFuncionario(funcionario);         
-                return RedirectToAction(nameof(Index));
+            _FuncionarioRepositorio.CadastrarFuncionario(funcionario);
+            return RedirectToAction(nameof(Index));
         }
         public IActionResult EditarFuncionario(int id)
         {
@@ -71,7 +71,7 @@ namespace CrudApplication.Controllers
         }
         public IActionResult Login()
         {
-             return View();
+            return View();
         }
 
         [HttpPost]
@@ -80,10 +80,13 @@ namespace CrudApplication.Controllers
             var funcionario = _FuncionarioRepositorio.ObterFuncionarioPorEmail(email);
             if (funcionario != null && funcionario.Senha == senha)
             {
+                HttpContext.Session.SetString("emailUsuario", funcionario.Email);
                 return RedirectToAction("Index", "Menu");
             }
-            return View(funcionario);
+
+            ViewBag.Erro = "Email ou senha inválidos.";
+            return View();
         }
-        
+
     }
 }
