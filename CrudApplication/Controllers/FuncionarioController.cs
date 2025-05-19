@@ -36,6 +36,17 @@ namespace CrudApplication.Controllers
 
         }
 
+        public IActionResult EditarFuncionario(int id)
+        {
+            var funcionario = _FuncionarioRepositorio.ObterFuncionarioPorId(id);
+
+            if (funcionario == null)
+            {
+                return NotFound();
+            }
+            return View(funcionario);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditarFuncionario(int id, [Bind("IdFuncionario, Nome,Email,Senha")] tbFuncionario funcionario)
