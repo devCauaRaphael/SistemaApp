@@ -87,6 +87,10 @@ namespace CrudApplication.Controllers
             ViewBag.Erro = "Email ou senha inválidos.";
             return View();
         }
+        public IActionResult Logout() { 
+              HttpContext.Session.Clear();
+           return RedirectToAction("Index", "Home");
+        }
 
     }
 }

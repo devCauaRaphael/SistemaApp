@@ -17,7 +17,7 @@ namespace CrudApplication.Controllers
 
             if (string.IsNullOrEmpty(email))
             {
-                return RedirectToAction("Login", "Funcionario"); // redireciona se não estiver logado
+                return RedirectToAction("Login", "Funcionario"); 
             }
 
             var funcionario = _FuncionarioRepositorio.ObterFuncionarioPorEmail(email);
@@ -27,7 +27,7 @@ namespace CrudApplication.Controllers
                 return RedirectToAction("Login", "Funcionario");
             }
 
-            return View(funcionario); // Passa o funcionário pra View
+            return View(funcionario);
         }
     }
 }
