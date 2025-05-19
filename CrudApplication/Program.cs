@@ -9,8 +9,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ProdutoRepositorio>();
 builder.Services.AddScoped<FuncionarioRepositorio>();
 
-var app = builder.Build();
+builder.Services.AddSession();
 
+var app = builder.Build();
+app.UseSession();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

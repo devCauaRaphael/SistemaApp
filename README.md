@@ -5,7 +5,11 @@ Projeto desenvolvido com foco em aprimorar as técnicas no ecossistema .NET, uti
 ✅ Como rodar o projeto
 Clone o repositório para sua máquina:
 Copiar código
-git clone(https://github.com/devCauaRaphael/CrudApplication)
+git clone https://github.com/devCauaRaphael/CrudApplication
+
+Abra o arquivo script no MySQL
+
+Crie o banco de dados no MySQL
 
 Abra o projeto no Visual Studio.
 
@@ -60,7 +64,7 @@ Busca com filtros avançados.
 
 Paginação e ordenação nas listagens.
 
-Mensagens de erro e sucesso.
+Criptografia de senha
 
 Adicionar novas tabelas e novos campos nas tabelas já existentes.
 

@@ -9,7 +9,7 @@ namespace CrudApplication.Repositorios
     {
         private readonly string _conexaoMySQL = configuration.GetConnectionString("ConexaoMySQL");
 
-        public void CadastrarFuncionario(tbFuncionario funcionario)
+        public bool CadastrarFuncionario(tbFuncionario funcionario)
         {
             using (var conexao = new MySqlConnection(_conexaoMySQL))
             {
@@ -29,6 +29,7 @@ namespace CrudApplication.Repositorios
                 {   
                     
                     Console.WriteLine("email já existente");
+                    return false;
                 }
                 else
                 {
@@ -38,6 +39,7 @@ namespace CrudApplication.Repositorios
                     cmdInsert.Parameters.Add("@email", MySqlDbType.VarChar).Value = funcionario.Email;
                     cmdInsert.Parameters.Add("@senha", MySqlDbType.String).Value = funcionario.Senha;
                     cmdInsert.ExecuteNonQuery();
+                    return true;
                 }
                 conexao.Close();
             }
@@ -111,6 +113,7 @@ namespace CrudApplication.Repositorios
                 while (dr.Read())
                 {
                     funcionario.Senha = (string)(dr["Senha"]);
+                    funcionario.Email = (string)(dr["Email"]);
                 }
                 return funcionario;
             }
@@ -152,5 +155,6 @@ namespace CrudApplication.Repositorios
                 conexao.Close();
             }
         }
+   
     }
 }
