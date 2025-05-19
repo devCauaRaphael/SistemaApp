@@ -23,20 +23,19 @@ namespace CrudApplication.Controllers
         }
         [HttpPost]
         public IActionResult CadastrarFuncionario(tbFuncionario funcionario)
-        {
-            _FuncionarioRepositorio.CadastrarFuncionario(funcionario);
-            return RedirectToAction(nameof(Index));
-        }
-        public IActionResult EditarFuncionario(int id)
-        {
-            var funcionario = _FuncionarioRepositorio.ObterFuncionarioPorId(id);
-
-            if (funcionario == null)
+        { 
+            if (_FuncionarioRepositorio.CadastrarFuncionario(funcionario))
             {
-                return NotFound();
+                _FuncionarioRepositorio.CadastrarFuncionario(funcionario);
+                TempData["Mensagem"] = "✅ Funcionário cadastrado com sucesso!";
+                return RedirectToAction(nameof(Index));
             }
-            return View(funcionario);
+            TempData["MensagemErro"] = "❌ Email já cadastrado.";
+            return View();
+         
+
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditarFuncionario(int id, [Bind("IdFuncionario, Nome,Email,Senha")] tbFuncionario funcionario)
@@ -44,6 +43,7 @@ namespace CrudApplication.Controllers
             ModelState.Clear();
             if (id != funcionario.IdFuncionario)
             {
+                TempData["MensagemErro"] = "❌ ID do funcionário inválido.";
                 return BadRequest();
             }
             if (ModelState.IsValid)
@@ -52,22 +52,24 @@ namespace CrudApplication.Controllers
                 {
                     if (_FuncionarioRepositorio.AtualizarFuncionario(funcionario))
                     {
+                        TempData["Mensagem"] = "✅ Funcionário atualizado com sucesso!";
                         return RedirectToAction(nameof(Index));
                     }
                 }
                 catch (Exception)
                 {
-                    ModelState.AddModelError("", "Ocorreu um erro ao Editar.");
+                    TempData["MensagemErro"] = "❌ Ocorreu um erro ao editar.";
                     return View(funcionario);
                 }
             }
             return View(funcionario);
         }
+
         public IActionResult ExcluirFuncionario(int id)
         {
             _FuncionarioRepositorio.ExcluirFuncionario(id);
+            TempData["Mensagem"] = "⚠️ Funcionário excluído com sucesso!";
             return RedirectToAction(nameof(Index));
-
         }
         public IActionResult Login()
         {
@@ -81,16 +83,19 @@ namespace CrudApplication.Controllers
             if (funcionario != null && funcionario.Senha == senha)
             {
                 HttpContext.Session.SetString("emailUsuario", funcionario.Email);
+                TempData["Mensagem"] = $"🔓 Bem-vindo(a), {funcionario.Email}!";
                 return RedirectToAction("Index", "Menu");
             }
 
-            ViewBag.Erro = "Email ou senha inválidos.";
+            ViewBag.Erro = "❌ Email ou senha inválidos.";
             return View();
         }
-        public IActionResult Logout() { 
-              HttpContext.Session.Clear();
-           return RedirectToAction("Index", "Home");
-        }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            TempData["Mensagem"] = "👋 Logout realizado com sucesso!";
+            return RedirectToAction("Login", "Funcionario");
+        }
     }
 }
