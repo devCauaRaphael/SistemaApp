@@ -5,7 +5,7 @@ Projeto desenvolvido com foco em aprimorar as técnicas no ecossistema .NET, uti
 ✅ Como rodar o projeto
 Clone o repositório para sua máquina:
 Copiar código
-git clone https://github.com/devCauaRaphael/CrudApplication
+git clone https://github.com/devCauaRaphael/SistemaApp
 
 Abra o arquivo script no MySQL
 
