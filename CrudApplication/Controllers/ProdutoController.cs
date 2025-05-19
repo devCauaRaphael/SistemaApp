@@ -25,6 +25,7 @@ namespace CrudApplication.Controllers
         public IActionResult CadastrarProduto(tbProduto produto)
         {
             _ProdutoRepositorio.CadastrarProduto(produto);
+            TempData["Mensagem"] = "✅ Produto cadastrado com sucesso!";
             return RedirectToAction(nameof(Index));
         }
         public IActionResult EditarProduto(int id)
@@ -44,6 +45,7 @@ namespace CrudApplication.Controllers
             ModelState.Clear();
             if (id != produto.IdProduto)
             {
+                TempData["MensagemErro"] = "❌ ID do produto inválido.";
                 return BadRequest();
             }
             if (ModelState.IsValid)
@@ -57,7 +59,7 @@ namespace CrudApplication.Controllers
                 }
                 catch (Exception)
                 {
-                    ModelState.AddModelError("", "Ocorreu um erro ao Editar.");
+                    TempData["MensagemErro"] = "❌ Ocorreu um erro ao editar."; 
                     return View(produto);
                 }
             }
