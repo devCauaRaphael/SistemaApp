@@ -93,7 +93,7 @@ namespace CrudApplication.Controllers
             var funcionario = _FuncionarioRepositorio.ObterFuncionarioPorEmail(email);
             if (funcionario != null && funcionario.Senha == senha)
             {
-                HttpContext.Session.SetString("emailUsuario", funcionario.Email);
+                HttpContext.Session.SetString("emailFuncionario", funcionario.Email);
                 TempData["Mensagem"] = $"🔓 Bem-vindo(a), {funcionario.Email}!";
                 return RedirectToAction("Index", "Menu");
             }
