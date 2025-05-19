@@ -13,7 +13,7 @@ namespace CrudApplication.Controllers
 
         public IActionResult Index()
         {
-            var email = HttpContext.Session.GetString("emailUsuario");
+            var email = HttpContext.Session.GetString("emailFuncionario");
 
             if (string.IsNullOrEmpty(email))
             {
